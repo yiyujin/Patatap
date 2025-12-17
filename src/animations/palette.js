@@ -4,7 +4,8 @@ export const keys = ['background', 'middleground', 'foreground', 'highlight', 'a
 export const palette = [
   {
     // Grey
-    background: { r: 181, g: 181, b: 181 },
+    // background: { r: 181, g: 181, b: 181 },
+    background: { r: 0, g: 0, b: 0 },
     middleground: { r: 141, g: 164, b: 170 },
     foreground: { r: 227, g: 79, b: 12 },
     highlight: { r: 163, g: 141, b: 116 },

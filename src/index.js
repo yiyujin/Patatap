@@ -13,8 +13,8 @@ import './animations/veil.js';
 import './animations/prisms.js';
 
 // Middleground
-import './animations/clay.js';
-import './animations/pistons.js';
+// import './animations/clay.js';
+// import './animations/pistons.js';
 import './animations/flashes.js';
 import './animations/spiral.js';
 import './animations/suspension.js';
@@ -24,7 +24,7 @@ import './animations/ufo.js';
 
 // Foreground
 import './animations/splits.js';
-import './animations/moon.js';
+// import './animations/moon.js';
 import './animations/strike.js';
 import './animations/zigzag.js';
 import './animations/squiggle.js';
@@ -32,6 +32,14 @@ import './animations/bubbles.js';
 import './animations/corona.js';
 import './animations/pinwheel.js';
 import './animations/glimmer.js';
+
+// SHADERS
+import './shaders/moon.js';
+import './shaders/diffsuedSphere.js';
+import './shaders/ripple.js';
+
+// Global z-index counter for layering animations
+let globalZIndex = 1000;
 
 $(() => {
   const $container = $('#content'),
@@ -160,87 +168,87 @@ $(() => {
 
         switch (code) {
           // Q - P
-          case 81:
-            index = '0,0';
+          case 81: // Q
+            index = '0,0'; // flash-1 (flashes.js)
             break;
-          case 87:
-            index = '0,1';
+          case 87: // W
+            index = '0,1'; // clay (clay.js)
             break;
-          case 69:
-            index = '0,2';
+          case 69: // E
+            index = '0,2'; // moon (moon.js)
             break;
-          case 82:
-            index = '0,3';
+          case 82: // R
+            index = '0,3'; // piston-1 (pistons.js)
             break;
-          case 84:
-            index = '0,4';
+          case 84: // T
+            index = '0,4'; // timer (timer.js)
             break;
-          case 89:
-            index = '0,5';
+          case 89: // Y
+            index = '0,5'; // suspension (suspension.js)
             break;
-          case 85:
-            index = '0,6';
+          case 85: // U
+            index = '0,6'; // prism-1 (prisms.js)
             break;
-          case 73:
-            index = '0,7';
+          case 73: // I
+            index = '0,7'; // squiggle (squiggle.js)
             break;
-          case 79:
-            index = '0,8';
+          case 79: // O
+            index = '0,8'; // glimmer (glimmer.js)
             break;
-          case 80:
-            index = '0,9';
+          case 80: // P
+            index = '0,9'; // spiral (spiral.js)
             break;
 
           // A - L
-          case 65:
-            index = '1,0';
+          case 65: // A
+            index = '1,0'; // flash-2 (flashes.js)
             break;
-          case 83:
-            index = '1,1';
+          case 83: // S
+            index = '1,1'; // veil (veil.js)
             break;
-          case 68:
-            index = '1,2';
+          case 68: // D
+            index = '1,2'; // ufo (ufo.js)
             break;
-          case 70:
-            index = '1,3';
+          case 70: // F
+            index = '1,3'; // piston-2 (pistons.js)
             break;
-          case 71:
-            index = '1,4';
+          case 71: // G
+            index = '1,4'; // bubbles (bubbles.js)
             break;
-          case 72:
-            index = '1,5';
+          case 72: // H
+            index = '1,5'; // strike (strike.js)
             break;
-          case 74:
-            index = '1,6';
+          case 74: // J
+            index = '1,6'; // prism-2 (prisms.js)
             break;
-          case 75:
-            index = '1,7';
+          case 75: // K
+            index = '1,7'; // pinwheel (pinwheel.js)
             break;
-          case 76:
-            index = '1,8';
+          case 76: // L
+            index = '1,8'; // zigzag (zigzag.js)
             break;
 
           // Z - M
-          case 90:
-            index = '2,0';
+          case 90: // Z
+            index = '2,0'; // flash-3 (flashes.js)
             break;
-          case 88:
-            index = '2,1';
+          case 88: // X
+            index = '2,1'; // wipe (wipe.js)
             break;
-          case 67:
-            index = '2,2';
+          case 67: // C
+            index = '2,2'; // splits (splits.js)
             break;
-          case 86:
-            index = '2,3';
+          case 86: // V
+            index = '2,3'; // piston-3 (pistons.js)
             break;
-          case 66:
-            index = '2,4';
+          case 66: // B
+            index = '2,4'; // corona (corona.js)
             break;
-          case 78:
-            index = '2,5';
+          case 78: // N
+            index = '2,5'; // confetti (confetti.js)
             break;
-          case 77:
-            index = '2,6';
+          case 77: // M
+            index = '2,6'; // prism-3 (prisms.js)
             break;
           // case 188:
           //   index = '2,7';
@@ -255,7 +263,7 @@ $(() => {
         switch (code) {
           // SPACE
           case 32:
-            index = '2,7';
+            index = '2,7'; // change-colors (change.js)
             trigger(index);
             triggered();
             break;
@@ -737,7 +745,7 @@ $(() => {
       if (animation.playing) {
         animation.clear();
       }
-      animation.start(silent);
+      animation.start(silent, globalZIndex++);
       if (window.gtag) {
         window.gtag('event', 'animation', {
           trigger: hash,
@@ -756,7 +764,8 @@ $(() => {
   }
 
   function showCredits() {
-    $container.css('top', `${-64}px`);
+    // Keep content pinned; avoid bumping it up on hover
+    $container.css('top', '0px');
     hideCredits();
   }
 });

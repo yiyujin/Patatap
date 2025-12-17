@@ -28,8 +28,9 @@ const animations = range(3).map((i) => {
   }
 
   function update() {
-    const index = palette.keys.length - 1 - (i % palette.keys.length);
-    const key = palette.keys[index];
+    // flash-1 uses 'foreground', flash-2 uses 'highlight', flash-3 uses 'accent'
+    const keys = ['foreground', 'highlight', 'accent'];
+    const key = keys[i % keys.length];
     shape.fill = palette.colors[key];
   }
 
